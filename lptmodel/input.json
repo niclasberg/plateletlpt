@@ -1,0 +1,62 @@
+{
+	"fluid":	{
+		"mu":	1e-5,
+		"rho": 	1e3
+	},
+	"injectors": [
+		{
+			"type":	"ToECMOCannula",
+			"particle":	{
+				"type":	"materialParticle",
+				"radius": 4e-6,
+				"density": 1e3,
+				"forces": [
+					{
+						"type": "StokesDrag"
+					}	
+				]		
+			}
+		}
+	],
+	"absorbers": [
+		{
+			"type": "ToECMOCannula"
+		}
+	],
+	"activation": {
+		"type": "nobili",
+		"a": 1,
+		"b": 10, 
+		"c": 1e-5
+	},
+	"boundaries": [
+		{
+			"file": "...",
+			"transform": {
+				"translate": [0, 0, 0],
+				"rotate": {
+					"axis": [0, 0, -1],
+					"angle": 10,
+					"rpm": 50
+				}
+			}
+		},
+		{
+			"file": "boundary.stl",
+		}
+	],
+	"input": {
+		"folder": "...",
+		"maxNumberOfFiles": 180,
+		"timeBetweenSamples": 1e-3
+	},
+	"output": {
+		"folder": ".",
+		"csvOutputInterval": 1,
+		"checkpointOutputInterval": 50
+	},
+	"timeStepping": {
+		"numberOfTimeSteps": 10000,
+		"subIterations": 1
+	}
+}
