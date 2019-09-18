@@ -69,7 +69,7 @@ private:
 	void absorbParticles();
 	void readDataAndUpdateInterpolators();
 	void updateParticleMomentumAndActivation(Particle * p);
-	void updateParticlePosition(Particle * p, scalar, scalar);
+	void updateParticlePosition(Particle * p, scalar, scalar, int collCount = 0);
 
 	bool isDone_ = false;
 	int substeps_ = 1;

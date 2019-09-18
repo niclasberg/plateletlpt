@@ -23,7 +23,7 @@ bool BVH::getIntersection(const Ray& ray, IntersectionInfo* intersection, bool o
   int32_t closer, other;
 
   // Working set
-  BVHTraversal todo[64];
+  BVHTraversal todo[256];
   int32_t stackptr = 0;
 
   // "Push" on the root node to the working set

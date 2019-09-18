@@ -193,12 +193,15 @@ void Model::updateParticleMomentumAndActivation(Particle * p)
 	}
 }
 
-void Model::updateParticlePosition(Particle * p, scalar tCurrent, scalar tNext)
+void Model::updateParticlePosition(Particle * p, scalar tCurrent, scalar tNext, int collCount)
 {
 	scalar dtCurrent = tNext - tCurrent;
 
 	Vector pos_last = p->position();
 	p->position() += dtCurrent * p->velocity();
+	
+	if(collCount > 10)
+		return;
 
 	// Check if the line between the current and the next position intersects the boundary
 	for(auto rtIt = rayTracers_.begin(); rtIt != rayTracers_.end(); ++rtIt) {
@@ -234,7 +237,7 @@ void Model::updateParticlePosition(Particle * p, scalar tCurrent, scalar tNext)
 			rayTracer.coordinateSystem().velocityToWorldFrame(tImpact, p->position(), velocityImpactLocalFrame, p->velocity());
 
 			// Update postion (post collision)
-			updateParticlePosition(p, tImpact, tNext);
+			updateParticlePosition(p, tImpact, tNext, collCount+1);
 
 			p->collisionCount() += 1;
 			break;
